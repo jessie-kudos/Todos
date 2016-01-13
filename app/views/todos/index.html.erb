@@ -1,0 +1,15 @@
+
+
+
+
+<%= link_to 'Add', "todos/new" %>
+<% @todos.each do |todo| %>
+<p> <%= todo.title %> <%= link_to 'Edit', edit_todo_path(todo) %> <%= link_to 'Delete', "todos/delete" %></p>
+<% end %>
+
+
+
+
+
+
+

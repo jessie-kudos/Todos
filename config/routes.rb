@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  # get '/todos' => 'todo#index'
+  # get '/todos/new' => 'todo#new'
+  # post 'todos' => 'todo#create'
+  # get '/todos/:id/edit' => 'todo#edit'
+  # patch '/todos/:id' => 'todo#update'
+  resources :todos
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
