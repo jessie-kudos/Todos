@@ -1,0 +1,17 @@
+AllCops:
+  Exclude:
+    - vendor/**/*
+    - bin/**/*
+    - db/**/*
+    - Guardfile
+    - Gemfile
+    - Rakefile
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+
+LineLength:
+  Max: 120
+
+Documentation:
+  # don't require classes to be documented
+  Enabled: false

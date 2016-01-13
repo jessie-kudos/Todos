@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -35,13 +36,31 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'shoulda-matchers', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner', '~> 1.3.0'
+  gem 'faker'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Spring speeds up development by keeping your application running in the background.
+  # Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rubocop', require: false
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-rubocop'
+  # gem 'guard-livereload', require: false
+  # gem 'rack-livereload'
+  gem 'terminal-notifier'
+  gem 'terminal-notifier-guard'
 end
 
