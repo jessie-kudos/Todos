@@ -1,15 +1,12 @@
 
-
-
-
-<%= link_to 'Add', "todos/new" %>
+<h1>To Do List</h1>
+<%= link_to 'Add New', "todos/new" %>
 <% @todos.each do |todo| %>
-<p> <%= todo.title %> <%= link_to 'Edit', edit_todo_path(todo) %> <%= link_to 'Delete', "todos/delete" %></p>
+  <p>
+    <%= todo.title %>
+    <%= link_to 'Mark as Complete', completed_todo_path(todo), method: :put %>
+    <%= link_to 'Edit', edit_todo_path(todo) %>
+    <%= link_to 'Delete', todo_path(todo), method: :delete, data: { confirm: 'Are you sure you want to delete?' } %>
+  </p>
+
 <% end %>
-
-
-
-
-
-
-
