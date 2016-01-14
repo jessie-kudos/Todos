@@ -12,7 +12,7 @@
     <%= link_to 'Edit', edit_todo_path(todo) %>
     <%= link_to 'Delete', todo_path(todo), method: :delete, data: { confirm: 'Are you sure you want to delete?' } %>
   </p>
-
 <% end %>
+<%= link_to 'Clear All', delete_all_todos_path, method: :delete, data: { confirm: 'Are you sure you want to delete all items?' } %>
 
 

@@ -131,4 +131,14 @@ RSpec.describe TodosController, type: :controller do
       expect { do_put }.to change { todo.reload.complete }.to(true)
     end
   end
+
+  describe 'DELETE #delete_all' do
+    subject(:do_delete) { delete :delete_all }
+
+    let!(:todo) { FactoryGirl.create(:todo) }
+
+    it 'should delete all Todos' do
+      expect { do_delete }.to change { Todo.count }.to(0)
+    end
+  end
 end

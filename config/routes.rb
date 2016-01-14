@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :todos, except: :show do
-    member do
-      put 'completed'
-    end
+    put :completed, on: :member
+    delete :delete_all, on: :collection
   end
 end
