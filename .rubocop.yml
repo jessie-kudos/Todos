@@ -16,3 +16,6 @@ LineLength:
 Documentation:
   # don't require classes to be documented
   Enabled: false
+
+RescueModifier:
+  Enabled: false
