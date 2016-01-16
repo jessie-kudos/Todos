@@ -19,11 +19,17 @@ RSpec.describe TodosController, type: :controller do
   describe 'GET #index' do
     subject(:do_get) { get :index }
 
-    let!(:todo) { FactoryGirl.create(:todo) }
+    let!(:todo) { FactoryGirl.create(:todo, user: user) }
+    let!(:other_todo) { FactoryGirl.create(:todo) }
 
-    it 'should assign @todos' do
+    it 'should assign @todos that belong to user' do
       do_get
       expect(assigns(:todos)).to include todo
+    end
+
+    it 'should not include other todos' do
+      do_get
+      expect(assigns(:todos)).to_not include other_todo
     end
   end
 
@@ -39,12 +45,18 @@ RSpec.describe TodosController, type: :controller do
   describe 'GET #edit' do
     subject(:do_get) { get :edit, id: todo_id }
 
-    let(:todo) { FactoryGirl.create(:todo) }
+    let(:todo) { FactoryGirl.create(:todo, user: user) }
     let(:todo_id) { todo.id }
 
     it 'should assign @todo' do
       do_get
       expect(assigns(:todo)).to eq todo
+    end
+
+    context 'when editing another user\'s Todo' do
+      let(:todo) { FactoryGirl.create(:todo) }
+
+      include_examples 'not found'
     end
 
     include_examples 'not found'
@@ -63,6 +75,11 @@ RSpec.describe TodosController, type: :controller do
     it 'should create a Todo with given params' do
       do_post
       expect(new_todo).to have_attributes params
+    end
+
+    it 'should create a Todo associated with User' do
+      do_post
+      expect(user.todos).to include new_todo
     end
 
     it 'should redirect to todos index' do
@@ -87,7 +104,7 @@ RSpec.describe TodosController, type: :controller do
   describe 'PUT #update' do
     subject(:do_put) { put :update, id: todo_id, todo: params }
 
-    let(:todo) { FactoryGirl.create(:todo) }
+    let(:todo) { FactoryGirl.create(:todo, user: user) }
     let(:todo_id) { todo.id }
     let(:params) { FactoryGirl.attributes_for(:todo) }
 
@@ -105,13 +122,23 @@ RSpec.describe TodosController, type: :controller do
       expect(response).to redirect_to todos_path
     end
 
+    context 'when updating another user\'s Todo' do
+      let(:todo) { FactoryGirl.create(:todo) }
+
+      it 'should not update existing' do
+        expect { do_put rescue nil }.to_not change { todo.reload.attributes }
+      end
+
+      include_examples 'not found'
+    end
+
     include_examples 'not found'
   end
 
   describe 'DELETE #destroy' do
     subject(:do_delete) { delete :destroy, id: todo_id }
 
-    let!(:todo) { FactoryGirl.create(:todo) }
+    let!(:todo) { FactoryGirl.create(:todo, user: user) }
     let(:todo_id) { todo.id }
 
     it 'should delete a Todo' do
@@ -122,27 +149,55 @@ RSpec.describe TodosController, type: :controller do
       expect { do_delete }.to change { Todo.exists?(todo) }.to(false)
     end
 
+    context 'when deleting another user\'s Todo' do
+      let(:todo) { FactoryGirl.create(:todo) }
+
+      it 'should not delete existing' do
+        expect { do_delete rescue nil }.to_not change { Todo.count }
+      end
+
+      include_examples 'not found'
+    end
+
     include_examples 'not found'
   end
 
   describe 'PUT #completed' do
     subject(:do_put) { put :completed, id: todo_id }
 
-    let!(:todo) { FactoryGirl.create(:todo) }
+    let!(:todo) { FactoryGirl.create(:todo, user: user) }
     let(:todo_id) { todo.id }
 
     it 'should mark todo as complete' do
       expect { do_put }.to change { todo.reload.complete }.to(true)
+    end
+
+    context 'when marking complete another user\'s Todo' do
+      let(:todo) { FactoryGirl.create(:todo) }
+
+      it 'should not mark complete' do
+        expect { do_put rescue nil }.to_not change { todo.reload.complete }
+      end
+
+      include_examples 'not found'
     end
   end
 
   describe 'DELETE #delete_all' do
     subject(:do_delete) { delete :delete_all }
 
-    let!(:todo) { FactoryGirl.create(:todo) }
+    let!(:todo) { FactoryGirl.create(:todo, user: user) }
 
-    it 'should delete all Todos' do
+    it 'should delete all Todos that belong to user' do
       expect { do_delete }.to change { Todo.count }.to(0)
+    end
+
+    context 'when other todos exist' do
+      let!(:todo) { FactoryGirl.create(:todo) }
+
+      it 'should not delete other user\'s todos' do
+        expect { do_delete rescue nil }.to_not change { Todo.count }
+      end
     end
   end
 end
