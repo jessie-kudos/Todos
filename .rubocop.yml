@@ -3,6 +3,7 @@ AllCops:
     - vendor/**/*
     - bin/**/*
     - db/**/*
+    - config/**/*
     - Guardfile
     - Gemfile
     - Rakefile
