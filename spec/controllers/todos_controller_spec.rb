@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe TodosController, type: :controller do
+  let(:user) { FactoryGirl.create(:user) }
+
+  before(:each) { login_user user }
+
   shared_examples_for 'not found' do
     context 'when todo does not exist with given id' do
       let(:do_request) { subject }
