@@ -1,5 +1,10 @@
 
 <h1>To Do List</h1>
+<% if user_signed_in? %>
+  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+<% else %>
+  <% redirect_to new_user_session %>
+<% end %>
 <%= link_to 'Add New', new_todo_path %>
 <% @todos.each do |todo| %>
   <p>
