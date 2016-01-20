@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Todos</title>
+  <title>My Todos</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -11,34 +11,29 @@
   <div class="off-canvas-wrap" data-offcanvas>
     <div class="inner-wrap">
       <nav class="tab-bar">
+
+        <% if user_signed_in? %>
         <section class="left-small">
-
           <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-
         </section>
+        <% end %>
 
         <section class="middle tab-bar-section">
-          <h1 class="title">Foundation</h1>
+          <h1 class="title">My ToDos</h1>
         </section>
 
+        <% if user_signed_in? %>
         <section class="right-small">
-          <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+         <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_todo_path, class: 'plus' %>
         </section>
+        <% end %>
       </nav>
 
       <aside class="left-off-canvas-menu">
         <ul class="off-canvas-list">
-          <li><label>Foundation</label></li>
-          <li><a href="#">The Psychohistorians</a></li>
-          <li><a href="#">...</a></li>
-        </ul>
-      </aside>
-
-      <aside class="right-off-canvas-menu">
-        <ul class="off-canvas-list">
-          <li><label>Users</label></li>
-          <li><a href="#">Hari Seldon</a></li>
-          <li><a href="#">...</a></li>
+          <li><label><%= current_user %></label></li>
+          <li> <%= link_to 'Change Password', edit_user_password_path %></li>
+          <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
         </ul>
       </aside>
 
