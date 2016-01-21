@@ -1,4 +1,14 @@
-<%= form_for @todo do |f| %>
-<%= f.text_field :title, :placeholder => "Add new item" %>
-<%= f.submit 'Submit' %>
-<% end %>
+<div class="panel">
+  <div class="row">
+    <div class="small-12 column">
+
+      <%= form_for @todo do |f| %>
+        <%= f.text_field :title, :placeholder => '' %>
+        <%= f.submit 'Add', :class => 'button expand' %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+
