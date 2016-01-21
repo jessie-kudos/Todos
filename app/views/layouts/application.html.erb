@@ -27,18 +27,25 @@
 
         <% if user_signed_in? %>
         <section class="right-small">
-         <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_todo_path, class: 'plus' %>
-        </section>
-        <% end %>
-      </nav>
+         <%= link_to fa_icon('plus'), new_todo_path, class: 'plus' %>
 
+         <%# Or you can do this %>
+         <%#= link_to new_todo_path, class: 'plus' do %>
+          <!-- <i class="fa fa-plus"></i> -->
+         <%# end %>
+        <% end %>
+        </section>
+
+      </nav>
+    <% if user_signed_in? %>
       <aside class="left-off-canvas-menu">
         <ul class="off-canvas-list">
-          <li><label><%= current_user %></label></li>
-          <li> <%= link_to 'Change Password', edit_user_password_path %></li>
+          <li><label><%= current_user.email %></label></li>
+          <li> <%= link_to 'Change Password', edit_user_registration_path %></li>
           <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
         </ul>
       </aside>
+    <% end %>
 
       <section class="main-section">
         <!-- content goes here -->
