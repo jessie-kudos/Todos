@@ -14,41 +14,72 @@
 
   <div class="off-canvas-wrap" data-offcanvas>
     <div class="inner-wrap">
-      <nav class="tab-bar">
 
-        <% if user_signed_in? %>
-        <section class="left-small">
-          <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
-        </section>
-        <% end %>
+      <div class="visible-for-small-only">
+        <nav class="tab-bar">
+          <% if user_signed_in? %>
+            <section class="left-small">
+              <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+            </section>
+          <% end %>
 
-        <section class="middle tab-bar-section">
-          <h1 class="title">My ToDos</h1>
-        </section>
+          <section class="middle tab-bar-section">
+            <h1 class="title">My ToDos</h1>
+          </section>
 
-        <% if user_signed_in? %>
-        <section class="right-small">
-         <%= link_to fa_icon('plus'), new_todo_path, class: 'plus' %>
+          <% if user_signed_in? %>
+            <section class="right-small text-center">
+             <%= link_to fa_icon('plus'), new_todo_path, class: 'plus' %>
 
-         <%# Or you can do this %>
-         <%#= link_to new_todo_path, class: 'plus' do %>
-          <!-- <i class="fa fa-plus"></i> -->
-         <%# end %>
-        <% end %>
-        </section>
+             <%# Or you can do this %>
+             <%#= link_to new_todo_path, class: 'plus' do %>
+              <!-- <i class="fa fa-plus"></i> -->
+             <%# end %>
+          <% end %>
+            </section>
+        </nav>
 
-      </nav>
-    <% if user_signed_in? %>
-      <aside class="left-off-canvas-menu">
-        <ul class="off-canvas-list">
-          <li><label><%= current_user.email %></label></li>
-          <li> <%= link_to 'Change Password', edit_user_registration_path %></li>
-          <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-        </ul>
-      </aside>
-    <% end %>
+          <% if user_signed_in? %>
+            <aside class="left-off-canvas-menu">
+              <ul class="off-canvas-list">
+                <li><label><%= current_user.email %></label></li>
+                <li> <%= link_to 'Change Password', edit_user_registration_path %></li>
+                <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </aside>
+          <% end %>
+      </div>
+
+
+        <div class="hide-for-small contain-to-grid">
+          <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+              <li class="name">
+                <h1><a href="#">My ToDos</a></h1>
+              </li>
+               <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+              <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+
+            <section class="top-bar-section">
+              <% if user_signed_in? %>
+                <ul class="right">
+                  <li class="has-dropdown">
+                    <a href="#"><%= current_user.email %></a>
+                    <ul class="dropdown">
+                      <li> <%= link_to 'Change Password', edit_user_registration_path %></li>
+                      <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+                    </ul>
+                  </li>
+                </ul>
+                <% end %>
+            </section>
+          </nav>
+        </div>
 
       <section class="main-section">
+
+      <%= render "shared/flash_alerts" %>
         <!-- content goes here -->
 
         <!-- <p class="notice"><%= notice %></p>
