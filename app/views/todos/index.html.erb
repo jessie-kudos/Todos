@@ -1,30 +1,49 @@
 
-<div class="row">
-  <div class="small-12 column">
-    <p>
-      <%= link_to 'Clear All', delete_all_todos_path, method: :delete, data: { confirm: 'Are you sure you want to delete all items?' } %>
-    </p>
+
+
+  <div class="row hide-for-small-only">
+    <div class="medium-10 medium-centered large-8 large-centered columns">
+      <%= form_for build_todo do |f| %>
+        <div class="row collapse">
+          <div class="small-10 columns">
+            <%= f.text_field :title, :placeholder => 'Add new Todo here' %>
+          </div>
+          <div class="small-2 columns">
+            <%= f.submit 'Add', :class => 'button postfix' %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
   </div>
-</div>
+
+
 
 <% @todos.each do |todo| %>
 
-<div class="row">
-  <div class="small-9 column">
-    <p>
-      <span class="<%= 'completed' if todo.complete? %>"><%= link_to todo.title, completed_todo_path(todo), method: :put, class: 'todo-title' %></span>
-    </p>
-  </div>
+  <div class="row">
+    <div class="small-9 medium-7 medium-offset-1 large-6 large-offset-2 column">
+      <p>
+        <span class="<%= 'completed' if todo.complete? %>"><%= link_to todo.title, completed_todo_path(todo), method: :put, class: 'todo-title' %></span>
+      </p>
+    </div>
 
-  <div class="small-3 column">
-    <ul class="nav pull-right">
-      <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_todo_path(todo) %>
-      <%= link_to '<i class="fa fa-trash"></i>'.html_safe, todo_path(todo), method: :delete %>
-    </ul>
+    <div class="small-3 medium-3 medium columns end large-2 columns end">
+      <ul class="nav pull-right">
+        <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_todo_path(todo) %>
+        <%= link_to '<i class="fa fa-trash"></i>'.html_safe, todo_path(todo), method: :delete %>
+      </ul>
+    </div>
   </div>
-</div>
 
 <% end %>
+
+
+<div class="row">
+  <div class="small-12 medium-10 medium-centered large-8 large-centered columns text-right">
+      <%= link_to 'Clear All', delete_all_todos_path, method: :delete, data: { confirm: 'Are you sure you want to delete all items?' } %>
+  </div>
+</div>
 
 
 
