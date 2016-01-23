@@ -65,7 +65,7 @@
               <% if user_signed_in? %>
                 <ul class="right">
                   <li class="has-dropdown">
-                    <a href="#"><%= current_user.email %></a>
+                    <a><%= current_user.email %></a>
                     <ul class="dropdown">
                       <li> <%= link_to 'Change Password', edit_user_registration_path %></li>
                       <li> <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
@@ -78,18 +78,11 @@
         </div>
 
       <section class="main-section">
-
-      <%= render "shared/flash_alerts" %>
-        <!-- content goes here -->
-
-        <!-- <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p> -->
-
+        <%= render "shared/flash_alerts" %>
         <%= yield %>
       </section>
 
     <a class="exit-off-canvas"></a>
-
     </div>
   </div>
 
