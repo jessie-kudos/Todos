@@ -9,7 +9,7 @@
       <%= form_for build_todo do |f| %>
         <div class="row collapse">
           <div class="small-10 columns">
-            <%= f.text_field :title, :placeholder => 'Add new Todo here' %>
+            <%= f.text_field :title, :required => true, :placeholder => 'Add new todo here' %>
           </div>
           <div class="small-2 columns">
             <%= f.submit 'Add', :class => 'button postfix' %>
@@ -23,32 +23,35 @@
 
 <div class="row">
   <div class="small-12 medium-10 medium-centered large-8 large-centered columns panel">
-    <% @todos.each do |todo| %>
+    <% if @todos.empty? %>
+      <div class="text-center">There are no todos yet.</div>
+
+    <% else %>
+      <% @todos.each do |todo| %>
+        <div class="row">
+          <div class="small-7 columns">
+            <p>
+              <span class="<%= 'completed' if todo.complete? %>"><%= link_to todo.title, completed_todo_path(todo), method: :put, class: 'todo-title' %></span>
+            </p>
+          </div>
+
+          <div class="small-5 columns">
+            <ul class="nav pull-right">
+              <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_todo_path(todo) %>
+              <%= link_to '<i class="fa fa-trash"></i>'.html_safe, todo_path(todo), method: :delete %>
+            </ul>
+          </div>
+        </div>
+
+      <% end %>
 
       <div class="row">
-        <div class="small-9 columns">
-          <p>
-            <span class="<%= 'completed' if todo.complete? %>"><%= link_to todo.title, completed_todo_path(todo), method: :put, class: 'todo-title' %></span>
-          </p>
-        </div>
-
-        <div class="small-3 columns">
-          <ul class="nav pull-right">
-            <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_todo_path(todo) %>
-            <%= link_to '<i class="fa fa-trash"></i>'.html_safe, todo_path(todo), method: :delete %>
-          </ul>
-        </div>
-      </div>
-
-    <% end %>
-
-
-    <div class="row">
-      <div class="small-12 columns text-right">
+        <div class="small-12 columns text-right">
           <%= link_to 'Clear All', delete_all_todos_path, method: :delete, data: { confirm: 'Are you sure you want to delete all items?' } %>
+        </div>
       </div>
-    </div>
-    </div>
+    <% end %>
+  </div>
 </div>
 
 
