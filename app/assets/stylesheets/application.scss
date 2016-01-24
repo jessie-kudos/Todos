@@ -10,15 +10,18 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require foundation
  *= require font-awesome
- *= require_tree .
- *= require_self
  */
 
-.pink-trash {
-  color: pink;
-}
+@import 'foundation';
+@import 'todo';
+
+$main-purple: #7F5BE1;
+$main-blue: #887CAF;
+$main-pink: #CD88AF;
+$main-green: #6FE9A8;
+$main-alert: #9C344C;
+$main-notice: #569532;
 
 .plus {
   color: white;
@@ -32,11 +35,55 @@
   margin-bottom: 0px;
 }
 
-.contain-to-grid .top-bar {
-  margin-bottom: 40px;
+.expand-small-only {
+  @media #{$small-only} {
+    width: 100%;
+  }
 }
 
-.tab-bar {
-  margin-bottom: 40px;
+.title-area .name a {
+  font-size: 2em;
+  color: white;
 }
+
+.tab-bar h1 {
+  font-size: 2em;
+}
+
+.button {
+  @include button($bg: $main-purple);
+}
+
+a {
+  color: $main-purple;
+  &:hover, &:focus {
+    color: darken($main-purple, 25%);
+  }
+}
+
+body {
+  background: lighten($oil, 10%);
+}
+
+.alert-box.alert {
+  @include alert(
+$bg: $main-alert
+    );
+}
+
+.alert-box.notice {
+  @include alert(
+$bg: $main-notice
+    );
+}
+
+.panel {
+  @include panel(
+$bg: white
+    );
+}
+
+
+
+
 
