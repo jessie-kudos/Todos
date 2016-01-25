@@ -12,11 +12,8 @@
 </head>
 <body>
 
-
   <div class="off-canvas-wrap" data-offcanvas>
     <div class="inner-wrap">
-
-
 
       <div class="visible-for-small-only">
         <nav class="tab-bar">
@@ -53,7 +50,6 @@
           <% end %>
       </div>
 
-
         <div class="hide-for-small contain-to-grid sticky">
           <nav class="top-bar" data-topbar role="navigation">
             <ul class="title-area">
@@ -79,7 +75,7 @@
                     </ul>
                   </li>
                 </ul>
-                <% end %>
+              <% end %>
             </section>
           </nav>
         </div>
@@ -90,11 +86,9 @@
         <%= yield %>
       </section>
 
-
-    <a class="exit-off-canvas"></a>
-  </div>
-
-  </div>
+      <a class="exit-off-canvas"></a>
+    </div> <!-- .inner-wrap -->
+  </div> <!-- .off-canvas-wrap -->
 
 </body>
 </html>

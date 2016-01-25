@@ -1,24 +1,20 @@
-
-
-
-  <div class="row hide-for-small-only">
-    <div class="medium-10 medium-centered large-8 large-centered columns" style="
-      padding-left: 0;
-      padding-right: 0;
+<div class="row hide-for-small-only">
+  <div class="medium-10 medium-centered large-8 large-centered columns" style="
+    padding-left: 0;
+    padding-right: 0;
     ">
-      <%= form_for build_todo do |f| %>
-        <div class="row collapse">
-          <div class="small-10 columns">
-            <%= f.text_field :title, :required => true, :placeholder => 'Add new todo here' %>
-          </div>
-          <div class="small-2 columns">
-            <%= f.submit 'Add', :class => 'button postfix' %>
-          </div>
+    <%= form_for build_todo do |f| %>
+      <div class="row collapse">
+        <div class="small-10 columns">
+          <%= f.text_field :title, :required => true, :placeholder => 'Add new todo here' %>
         </div>
-
-      <% end %>
-    </div>
+        <div class="small-2 columns">
+          <%= f.submit 'Add', :class => 'button postfix' %>
+        </div>
+      </div>
+    <% end %>
   </div>
+</div>
 
 
 <div class="row">
@@ -26,15 +22,13 @@
 
     <% if @todos.empty? %>
       <div class="text-center">There are no todos yet.</div>
-
     <% else %>
-    <p class="text-center">
-<a id='hideCompletedBtn' style="display: none;">Hide Completed</a>
-<a id='showCompletedBtn' style="display: none;">Show Completed</a>
-</p>
+      <p class="text-center">
+        <a id='hideCompletedBtn' style="display: none;">Hide Completed</a>
+        <a id='showCompletedBtn' style="display: none;">Show Completed</a>
+      </p>
 
       <% @todos.each do |todo| %>
-
         <div class="row">
           <div class="small-7 columns">
             <p>
@@ -49,8 +43,6 @@
             </ul>
           </div>
         </div>
-
-
       <% end %>
 
       <div class="row">
