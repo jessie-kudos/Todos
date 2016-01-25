@@ -16,7 +16,7 @@
 @import 'foundation';
 @import 'todo';
 
-$main-purple: #7F5BE1;
+$main-purple: #A378FA;
 $main-blue: #887CAF;
 $main-pink: #CD88AF;
 $main-green: #6FE9A8;
@@ -43,11 +43,12 @@ $main-notice: #569532;
 
 .title-area .name a {
   font-size: 2em;
-  color: white;
+
 }
 
 .tab-bar h1 {
   font-size: 2em;
+  color: $main-purple;
 }
 
 .button {
@@ -62,7 +63,7 @@ a {
 }
 
 body {
-  background: lighten($oil, 10%);
+  background: lighten($oil, 15%);
 }
 
 .alert-box.alert {
@@ -82,6 +83,8 @@ $bg: $main-notice
 $bg: white
     );
 }
+
+
 
 
 

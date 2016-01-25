@@ -3,7 +3,7 @@ class TodosController < ApplicationController
   before_action :set_todo, only: [:edit, :update, :destroy, :completed]
 
   def index
-    @todos = current_user.todos
+    @todos = current_user.todos.order(:created_at)
   end
 
   def new

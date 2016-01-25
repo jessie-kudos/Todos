@@ -16,6 +16,8 @@
   <div class="off-canvas-wrap" data-offcanvas>
     <div class="inner-wrap">
 
+
+
       <div class="visible-for-small-only">
         <nav class="tab-bar">
           <% if user_signed_in? %>
@@ -52,13 +54,13 @@
       </div>
 
 
-        <div class="hide-for-small contain-to-grid">
+        <div class="hide-for-small contain-to-grid sticky">
           <nav class="top-bar" data-topbar role="navigation">
             <ul class="title-area">
               <li class="name">
                 <h1>
                   <a style="
-                      color: white;
+                      color: #A378FA;
                   ">todos.</a>
                   </h1>
               </li>
@@ -88,8 +90,10 @@
         <%= yield %>
       </section>
 
+
     <a class="exit-off-canvas"></a>
-    </div>
+  </div>
+
   </div>
 
 </body>
